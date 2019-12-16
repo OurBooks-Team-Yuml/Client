@@ -1,70 +1,26 @@
-'use strict'
+const paths         = require('./paths.js');
 
-const path = require('path');
-const webpack = require('webpack')
-const { VueLoaderPlugin } = require('vue-loader')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+const path          = require('path');
+const webpackMerge  = require('webpack-merge');
+const baseConfig    = require('./webpack.config.base.js');
+const WebpackAssetsManifest = require('webpack-assets-manifest');
 
-function resolve (dir) {
-  return path.join(__dirname, '..', dir)
-}
 
-module.exports = {
-  mode: 'development',
-
-  entry: [
-    './src/app.js'
-  ],
-
-  devServer: {
-    hot: true,
-    watchOptions: {
-      poll: true
-    }
-  },
-
-  module: {
-    rules: [
-      {
-        test: /\.vue$/,
-        use: [
-          'vue-loader',
-        ]
-      },
-      {
-        test: /\.js$/,
-        use: 'babel-loader'
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          'vue-style-loader',
-          'css-loader',
-          'sass-loader',
-        ]
+module.exports = webpackMerge(baseConfig, {
+    mode: 'development',
+    devServer: {
+      hot: true,
+      watchOptions: {
+          poll: true
       }
+    },
+    output: {
+        path: path.resolve(__dirname, paths.localOutputDir),
+        filename: '[name].[chunkhash].js'
+    },
+    plugins: [
+        new WebpackAssetsManifest({
+            output: path.resolve() + '/manifest-local.json'
+        })
     ]
-  },
-
-  resolve: {
-    extensions: ['.js', '.vue', '.json'],
-    alias: {
-      '@': resolve('src')
-    }
-  },
-
-  plugins: [
-    new VueLoaderPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/index.html',
-      inject: true
-    }),
-    new webpack.ProvidePlugin({
-      $: "jquery",
-      jQuery: "jquery",
-      jquery: 'jquery',
-      'window.jQuery': 'jquery',
-    })
-  ]
-}
+});

@@ -20,6 +20,7 @@ npm run dev
 
 ### RUNNING TESTS
 ```
+npm run test / npm run test-watch
 ```
 
 ## Authors
