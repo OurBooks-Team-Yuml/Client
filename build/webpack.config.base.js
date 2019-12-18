@@ -17,10 +17,10 @@ module.exports = {
     target: 'web',
     externals: {}, //Externalizing dependencies for speed and for test written without browser usage
     context: paths.baseInputDir,
-    entry: [
-        './src/app.js'
-    ],
-   // devtool: 'inline-cheap-module-source-map',
+    entry: {
+        app: './app.js',
+    },
+    // devtool: 'inline-cheap-module-source-map',
     module: {
         rules: [
             {
@@ -65,7 +65,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'src/index.html',
+            template: 'index.html',
             inject: true
         }),
         // Provide basic 3d-party plugins.

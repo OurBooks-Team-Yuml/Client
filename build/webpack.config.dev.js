@@ -16,7 +16,7 @@ module.exports = webpackMerge(baseConfig, {
     },
     output: {
         path: path.resolve(__dirname, paths.localOutputDir),
-        filename: '[name].[chunkhash].js'
+        filename: '[name].[hash].js'
     },
     plugins: [
         new WebpackAssetsManifest({

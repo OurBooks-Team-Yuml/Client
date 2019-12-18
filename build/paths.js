@@ -7,5 +7,6 @@ const baseInputDir  = path.join(baseDir, 'src');
 module.exports = {
     baseDir,
     baseOutputDir,
-    baseInputDir
+    baseInputDir,
+    localOutputDir: path.join(baseOutputDir, 'local'),
 }
