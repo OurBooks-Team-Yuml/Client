@@ -1,13 +1,17 @@
 <template>
-    <div id="app">
-        <p class="hello-world">Hello world</p>
-        <img src="./assets/images/download.png">
-        <router-view/>
-    </div>
+  <div id="app">
+    <img src="./assets/images/a.jpg">
+    <h1>{{ msg }}</h1>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'App'
+  name: 'app',
+  data () {
+    return {
+      msg: 'Hello'
+    }
+  }
 }
 </script>
