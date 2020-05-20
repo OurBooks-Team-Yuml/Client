@@ -1,17 +1,8 @@
 <template>
   <div id="app">
-    <img src="./assets/images/a.jpg">
-    <h1>{{ msg }}</h1>
+    <div id="nav">
+      <router-link :to="{ name: 'Home' }">Home</router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Hello'
-    }
-  }
-}
-</script>

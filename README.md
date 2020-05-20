@@ -1,13 +1,21 @@
-# OurBooks
+# Books client
 
-## Build Setup
-
+## Project setup
 ```
-# install dependencies
 npm install
 ```
 
-# start server with hot reload
+### Compiles and hot-reloads for development
 ```
-npm run dev
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
 ```
