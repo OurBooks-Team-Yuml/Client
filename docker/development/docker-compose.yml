@@ -1,0 +1,19 @@
+version: '3.7'
+
+networks:
+    books:
+        name: books-external
+
+services:
+    client-builder:
+        build:
+            context: ../..
+            dockerfile: ./docker/development/Dockerfile
+        networks:
+            - books
+        volumes:
+            - ../..:/app
+        working_dir: /app
+        ports:
+            - 8080:8080
+        command: './tools/run-developmentcd.sh'
