@@ -1,4 +1,4 @@
-import Vue from "vue";
+import { createApp } from 'vue';
 import createAuth0Client from "@auth0/auth0-spa-js";
 
 /** Define a default action to perform after authentication */
@@ -19,7 +19,7 @@ export const useAuth0 = ({
     if (instance) return instance;
 
     // The 'instance' is simply a Vue object
-    instance = new Vue({
+    instance = createApp({
         data() {
             return {
                 loading: true,
@@ -117,11 +117,4 @@ export const useAuth0 = ({
     });
 
     return instance;
-};
-
-// Create a simple Vue plugin to expose the wrapper object throughout the application
-export const Auth0Plugin = {
-    install(Vue, options) {
-        Vue.prototype.$auth = useAuth0(options);
-    }
 };

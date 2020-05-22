@@ -2,5 +2,5 @@
 
 set -e
 
-npm install -g
+npm install
 npm run dev

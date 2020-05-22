@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import { createApp, provide, inject } from 'vue';
 import App from './App.vue'
 import router from './router'
 
@@ -6,10 +6,27 @@ import router from './router'
 import { domain, clientId } from "../auth_config.json";
 
 // Import the plugin here
-import { Auth0Plugin } from "./auth";
+import { useAuth0 } from "./auth";
+
+const app = createApp(App);
+
+
+const user = useAuth0()
+
+function Auth0Plugin(options) {
+  provide(user, options)
+}
+
+function useStore(options) {
+  const store = inject(Auth0Plugin(options))
+  if (!store) {
+    // throw error, no store provided
+  }
+  return store
+}
 
 // Install the authentication plugin here
-Vue.use(Auth0Plugin, {
+app.use(useStore, {
     domain,
     clientId,
     onRedirectCallback: appState => {
@@ -21,9 +38,10 @@ Vue.use(Auth0Plugin, {
     }
 });
 
-Vue.config.productionTip = false;
+app.config.productionTip = false;
 
-new Vue({
-    router,
-    render: h => h(App)
-}).$mount("#app");
+app.use(router);
+
+router.isReady().then(() => {
+    app.mount('#app');
+});
