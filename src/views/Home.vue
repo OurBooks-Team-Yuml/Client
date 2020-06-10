@@ -3,7 +3,6 @@
         <!-- Check that the SDK client is not currently loading before accessing is methods -->
         <div v-if="!$auth.loading">
             <!-- show login when not authenticated -->
-            {{ isAuthenticated }}
             <button v-if="!$auth.isAuthenticated" @click="login">Log in</button>
             <div v-if="$auth.isAuthenticated">
                 <h1 v-if="$auth.isAuthenticated">{{ $auth.user.name }}</h1>
@@ -21,7 +20,7 @@
 
 <script>
 import { reactive } from 'vue';
-import { Auth0Service, useAuth0 } from './../auth/index.js';
+import { Auth0Service, useAuth0 } from './../auth/index.ts';
 
 export default {
     name: 'Home',

@@ -1,10 +1,8 @@
 import { inject, provide } from 'vue';
-import router from './../router'
-import createAuth0Client from "@auth0/auth0-spa-js";
+import router from '../router'
+import createAuth0Client, { Auth0Client } from "@auth0/auth0-spa-js";
 
-const AUTH0_SERVICE = Symbol();
-
-let instance;
+let instance: any;
 
 const getAuth0Instance = () => {
     if (instance) return instance;
@@ -14,15 +12,32 @@ const getAuth0Instance = () => {
     return instance;
 };
 
-export async function createAuth0Instance() {
+interface Auth0 {
+    loading: boolean
+    popupOpen: boolean
+
+    user: Record<string, string>
+    error: string | null
+
+    isAuthenticated: boolean
+
+    loginWithRedirect(): any
+    getIdTokenClaims(): any
+    getTokenSilently(): Promise<string>
+    getTokenWithPopup(): Promise<string>
+    logout(): any
+}
+
+export async function createAuth0Instance(): Promise<Auth0> {
     let loading = false;
     let user = {};
-    let auth0Client = null;
     let popupOpen = false;
     let error = null;
     let isAuthenticated = false;
 
-    async function initClient() {
+    let auth0Client: Auth0Client;
+
+    async function initClient(): Promise<void> {
         auth0Client = await createAuth0Client({
             domain: "dev-b5gefs5h.eu.auth0.com",
             client_id: "5g2iAThsMyeOlM4Lo09ogdvyH2w1B6Eg",
@@ -69,7 +84,7 @@ export async function createAuth0Instance() {
         return auth0Client.getTokenWithPopup();
     }
     
-    function logout(...options) {
+    function logout(...options: any) {
         return auth0Client.logout(options);
     }
 
@@ -86,6 +101,8 @@ export async function createAuth0Instance() {
         logout,
     }
 }
+
+const AUTH0_SERVICE = Symbol();
 
 export function Auth0Service() {
     provide(AUTH0_SERVICE, getAuth0Instance())
