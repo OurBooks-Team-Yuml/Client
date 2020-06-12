@@ -21,7 +21,7 @@
 
 <script>
 import { reactive, computed } from 'vue';
-import { Auth0Service, useAuth0 } from './../auth/index.ts';
+import { useAuth0 } from './../auth/index.ts';
 import { useStore } from 'vuex'
 
 export default {
@@ -37,7 +37,6 @@ export default {
         // this is only for test for test sore is work. TOOD delete this.
         const test = computed(() => store.state.test)
 
-        Auth0Service()
         let $auth = await useAuth0()
 
         function login() {
