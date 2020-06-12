@@ -104,7 +104,14 @@ export async function createAuth0Instance(): Promise<Auth0> {
 
 const AUTH0_SERVICE = Symbol();
 
-export function Auth0Service() {
+export default function install(app: any): void {
+    const instance = getAuth0Instance();
+
+    app.provide(AUTH0_SERVICE, instance);
+    app.config.globalProperties.$store = instance;
+}
+
+export function Auth0Service(): void {
     provide(AUTH0_SERVICE, getAuth0Instance())
 }
 
