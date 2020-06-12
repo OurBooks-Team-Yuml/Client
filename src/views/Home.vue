@@ -20,7 +20,7 @@
 
 <script>
 import { reactive } from 'vue';
-import { Auth0Service, useAuth0 } from './../auth/index.ts';
+import { useAuth0 } from './../auth/index.ts';
 
 export default {
     name: 'Home',
@@ -30,7 +30,6 @@ export default {
             token: null,
         })
 
-        Auth0Service()
         let $auth = await useAuth0()
 
         function login() {
