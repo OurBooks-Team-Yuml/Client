@@ -13,14 +13,16 @@
 
                 <!-- show logout when authenticated -->
                 <button  @click="logout">Log out</button>
+                {{ test }}
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { reactive } from 'vue';
+import { reactive, computed } from 'vue';
 import { useAuth0 } from './../auth/index.ts';
+import { useStore } from 'vuex'
 
 export default {
     name: 'Home',
@@ -29,6 +31,11 @@ export default {
         const state = reactive({
             token: null,
         })
+
+        const store = useStore()
+
+        // this is only for test for test sore is work. TOOD delete this.
+        const test = computed(() => store.state.test)
 
         let $auth = await useAuth0()
 
@@ -50,7 +57,8 @@ export default {
             getToken,
             logout,
             $auth,
+            test
         }
-    }
+    },
 };
 </script>

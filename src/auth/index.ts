@@ -43,14 +43,14 @@ export async function createAuth0Instance(): Promise<Auth0> {
             client_id: "5g2iAThsMyeOlM4Lo09ogdvyH2w1B6Eg",
             redirect_uri: window.location.origin,
         });
-        
+
         try {
             if (
                 window.location.search.includes("code=") &&
                 window.location.search.includes("state=")
             ) {
                 const { appState } = await auth0Client.handleRedirectCallback();
-    
+
                 router.push(
                     appState && appState.targetUrl
                         ? appState.targetUrl
@@ -75,15 +75,15 @@ export async function createAuth0Instance(): Promise<Auth0> {
     function getIdTokenClaims() {
         return auth0Client.getIdTokenClaims();
     }
-    
+
     function getTokenSilently() {
         return auth0Client.getTokenSilently();
     }
-    
+
     function getTokenWithPopup() {
         return auth0Client.getTokenWithPopup();
     }
-    
+
     function logout(...options: any) {
         return auth0Client.logout(options);
     }

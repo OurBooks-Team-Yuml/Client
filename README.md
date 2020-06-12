@@ -25,3 +25,14 @@ To run development environment use:
 ```
 docker-compose up --build
 ```
+
+## Run e2e cypress tests.
+To only run test
+```
+$(npm bin)/cypress run
+```
+
+To open Cypress Test Runner
+```
+$(npm bin)/cypress open
+```
