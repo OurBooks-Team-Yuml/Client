@@ -1,0 +1,18 @@
+version: '3.7'
+
+networks:
+    books:
+        name: books-external
+
+services:
+    client-builder:
+        image: node:12
+        working_dir: /app
+        volumes:
+            - "../..:/app"
+        networks:
+            - books
+        ports:
+            - 8080:8080
+        command:
+            - "/app/tools/run-development.sh"

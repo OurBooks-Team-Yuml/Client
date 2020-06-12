@@ -19,3 +19,9 @@ npm run build
 ```
 npm run lint
 ```
+
+## Project setup and run by Docker 
+To run development environment use:
+```
+docker-compose up --build
+```
